@@ -1,33 +1,101 @@
-# Gradle files
-.gradle/
-build/
+// File: src/App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Users from "./pages/Users";
+import Deposits from "./pages/Deposits";
+import Withdrawals from "./pages/Withdrawals";
+import Charity from "./pages/Charity";
+import News from "./pages/News";
+import Login from "./pages/Login";
 
-# Local configuration file (sdk path, etc)
-local.properties
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/deposits" element={<Deposits />} />
+        <Route path="/withdrawals" element={<Withdrawals />} />
+        <Route path="/charity" element={<Charity />} />
+        <Route path="/news" element={<News />} />
+      </Routes>
+    </Router>
+  );
+}
 
-# Log/OS Files
-*.log
+export default App;
 
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
+// File: src/pages/Dashboard.jsx
+import React from "react";
 
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
+function Dashboard() {
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="bg-white shadow-md rounded-xl p-4">Total Users</div>
+        <div className="bg-white shadow-md rounded-xl p-4">Total Deposits</div>
+        <div className="bg-white shadow-md rounded-xl p-4">Total Withdrawals</div>
+        <div className="bg-white shadow-md rounded-xl p-4">Charity Balance</div>
+      </div>
+    </div>
+  );
+}
 
-# Keystore files
-*.jks
-*.keystore
+export default Dashboard;
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
+// File: src/pages/Login.jsx
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-# Android Profiling
-*.hprof
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (email === "digitalpayadmen@gmail.com" && password === "admin123") {
+      navigate("/dashboard");
+    } else {
+      alert("Invalid credentials");
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form onSubmit={handleLogin} className="bg-white p-6 rounded-xl shadow-md w-96">
+        <h2 className="text-xl font-bold mb-4 text-center">Admin Login</h2>
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full p-2 border mb-4 rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full p-2 border mb-4 rounded"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button
+          type="submit"
+          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default Login;
+
+// Other pages (Users, Deposits, Withdrawals, Charity, News) will be added next...
+
