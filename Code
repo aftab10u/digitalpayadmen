@@ -6,13 +6,13 @@ digitalpay-app/
 ├── src/
 │   ├── App.js
 │   ├── index.js
-│   ├── firebase.js        <-- اگر Firebase استعمال کر رہے ہیں
+│   ├── firebase.js        <-- Firebase 
 │   └── components/
-│       └── Navbar.js      <-- آپ کے custom components
+│       └── Navbar.js      <--  custom components
 │
 ├── .gitignore
 ├── package.json
 ├── README.md
-├── firebase.json          <-- (اگر Firebase Hosting ہے)
+├── firebase.json          <-- ( Firebase Hosting )
 ├── .firebaserc            <-- (Firebase Project ID)
-└── .env                   <-- (Environment Variables جیسے Firebase keys)
+└── .env                   <-- (Environment Variables Firebase keys)
