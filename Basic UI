@@ -1,0 +1,17 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(DigitalPayApp());
+
+class DigitalPayApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Digital Pay',
+      theme: ThemeData(primarySwatch: Colors.indigo),
+      home: Scaffold(
+        appBar: AppBar(title: Text('ڈیجیٹل پے')),
+        body: Center(child: Text('خوش آمدید!')),
+      ),
+    );
+  }
+}
