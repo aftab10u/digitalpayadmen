@@ -1,0 +1,11 @@
+digitalpay_project/
+│
+├── android/
+├── ios/
+├── lib/
+│   └── main.dart
+├── assets/
+│   └── logo.png (اگر کوئی ہو)
+├── pubspec.yaml
+├── codemagic.yaml
+├── README.md
