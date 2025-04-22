@@ -1,15 +1,66 @@
 workflows:
-  build-android:
-    name: Build Android Release
-    max_build_duration: 60
+  react_native_ios_build:
+    name: Build iOS React Native App
+    max_build_duration: 120
+    jobs:
+      - title: Install Dependencies for iOS
+        script:
+          - npm install
+          - cd ios && pod install && cd ..
+      - title: Build iOS App
+        script:
+          - npx react-native run-ios --configuration Release
+        artifacts:
+          - build/ios/Build/Products/Release-iphoneos/*.app
     environment:
-      flutter: stable
-    scripts:
-      - name: Get dependencies
-        script: |
-          flutter pub get
-      - name: Build AAB
-        script: |
-          flutter build appbundle --release
-    artifacts:
-      - build/app/outputs/bundle/release/app-release.aab
+      vars:
+        NODE_ENV: production
+
+  react_native_android_build:
+    name: Build Android React Native App
+    max_build_duration: 120
+    jobs:
+      - title: Install Dependencies for Android
+        script:
+          - npm install
+      - title: Build Android App
+        script:
+          - npx react-native run-android --variant=release
+        artifacts:
+          - android/app/build/outputs/apk/release/*.apk
+    environment:
+      vars:
+        NODE_ENV: production
+
+  react_web_build:
+    name: Build React Web App
+    max_build_duration: 60
+    jobs:
+      - title: Install Dependencies for Web
+        script:
+          - npm install
+      - title: Build Web App
+        script:
+          - npm run build
+        artifacts:
+          - build/*
+    environment:
+      vars:
+        NODE_ENV: production
+
+  deploy:
+    name: Deploy to Production
+    max_build_duration: 60
+    jobs:
+      - title: Deploy iOS App
+        script:
+          - echo "Deploying iOS App to App Store..."
+          # Deployment steps for iOS (if needed)
+      - title: Deploy Android App
+        script:
+          - echo "Deploying Android App to Play Store..."
+          # Deployment steps for Android (if needed)
+      - title: Deploy Web App
+        script:
+          - echo "Deploying Web App..."
+          # Deployment steps for Web (if needed)
