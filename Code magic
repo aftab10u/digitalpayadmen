@@ -1,0 +1,18 @@
+workflows:
+  flutter-app:
+    name: Digital Pay Android Build
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      android_signing:
+        keystore: encoded_keystore
+        keystore_password: $KEYSTORE_PASSWORD
+        key_alias: $KEY_ALIAS
+        key_password: $KEY_PASSWORD
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build AAB
+        script: flutter build appbundle
+    artifacts:
+      - build/**/outputs/**/*.aab
